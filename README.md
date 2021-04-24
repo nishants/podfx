@@ -33,12 +33,22 @@
 - [x] list pods in a cluster
 - [x] get containers on a pod
 - [x] run kubectul exec in a node program
-- [ ] run exec with file streams
-- [ ] run exec with custom streams
-- [ ] create custom streams
+- [x] run exec with file streams
+- [x] run exec with custom streams
 - [ ] test spike with a cluster on AKS
 - [ ] test spike on a with oauth protected api
+- [ ] download a file using exec
+- [ ] create a text file using exec
+- [ ] create a binary file using exec
 - [ ] handle containers with sidecar
+
+
+
+How to parse console outptuts and map it to a command ? 
+
+- Every output will end with a `#` on cli.
+- For every command, append it with `#` so we can ignore echoed command
+- when reading output, ignore all lines with a `#` at end
 
 
 

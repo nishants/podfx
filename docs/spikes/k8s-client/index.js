@@ -35,6 +35,10 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
   const Writable = Stream.Writable;
   const output = [];
   const errors = [];
+  const shouldIgnoreLine = (utf8) => {
+    const cleaned = utf8.replace(/\\n/g, "").replace(/\\r/g, "").trim();
+    return cleaned.endsWith('#')
+  };
 
   const inStream = new Readable({
     objectMode: true,
@@ -45,7 +49,9 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
     objectMode: true,
     write(data, _, done){
       const utf8 = data.toString('utf-8');
-      output.push(utf8);
+      if(!shouldIgnoreLine(utf8)){
+        output.push(utf8);
+      }
       done();
     }
   });
@@ -72,7 +78,8 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
       connection.terminate();
     });
 
-  inStream.push("ls -a #end\n");
-  inStream.push("exit #end\n");
+  inStream.push("ls -l -a #\n");
+  inStream.push("\n");
+  inStream.push("exit #\n");
    // console.log({kubeContexts, currentContext, namespaces, chosenNameSpace, podsInNamespace, chosenPodName, container });
 })();
