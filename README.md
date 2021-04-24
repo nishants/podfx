@@ -27,7 +27,7 @@
 
 ### Todo 
 
-- [ ] detect all cluster in local kubectl config
+- [x] detect all cluster in local kubectl config
 - [ ] connect to a cluster
 - [ ] list namespaces in a cluster 
 - [ ] list pods in a cluster
