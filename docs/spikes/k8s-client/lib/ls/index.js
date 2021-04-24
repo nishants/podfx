@@ -1,8 +1,7 @@
 const k8s = require('@kubernetes/client-node');
 const { createWriteStream, createReadStream } = require('../streams');
 
-const getFiles = (kubeConfig, chosenNameSpace, podName, containerName, path = "/") => {
-  const exec = new k8s.Exec(kubeConfig);
+const getFiles = (exec, chosenNameSpace, podName, containerName, path = "/") => {
   const inStream = createReadStream();
 
   const output = [];
@@ -18,6 +17,15 @@ const getFiles = (kubeConfig, chosenNameSpace, podName, containerName, path = "/
     output.push(utf8);
   });
 
+  const getFilesFrom = (output) => {
+    const lines = output
+      .map(o => o.split("\r\n"))
+      .reduce((all, el) => [...all, ...el], [])
+      .filter(a => a.length);
+
+    return lines;
+  };
+
   return new Promise(async (resolve, reject) => {
     const connection = await exec.exec(chosenNameSpace, podName, containerName, ['ls','-lhaF' , path],
       outStream,
@@ -30,8 +38,9 @@ const getFiles = (kubeConfig, chosenNameSpace, podName, containerName, path = "/
         if(errors.length){
           return reject(errors)
         }
-        resolve(output);
+        resolve(getFilesFrom(output));
       }).catch(reject);
+    console.log(connection);
   });
 };
 

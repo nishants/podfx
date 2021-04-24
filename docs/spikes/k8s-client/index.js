@@ -32,7 +32,9 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
   const podName = chosenPodName.metadata.name;
   const containerName = container.name;
   const {getFiles} = require('./lib/ls');
-  const files = await getFiles(kubeConfig, chosenNameSpace, podName, containerName, '/');
+  const exec = new k8s.Exec(kubeConfig);
+
+  const files = await getFiles(exec, chosenNameSpace, podName, containerName, '/app');
   console.log({files});
   // console.log({kubeContexts, currentContext, namespaces, chosenNameSpace, podsInNamespace, chosenPodName, container });
 })();
