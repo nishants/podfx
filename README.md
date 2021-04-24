@@ -28,9 +28,9 @@
 ### Todo 
 
 - [x] detect all cluster in local kubectl config
-- [ ] connect to a cluster
-- [ ] list namespaces in a cluster 
-- [ ] list pods in a cluster
+- [x] connect to a cluster
+- [x] list namespaces in a cluster 
+- [x] list pods in a cluster
 - [ ] run kubectul exec in a node program
 
 

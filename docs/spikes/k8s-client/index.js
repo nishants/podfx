@@ -8,4 +8,20 @@ kubeConfig.loadFromDefault();
 // kubectl config get-contexts
 const kubeContexts = kubeConfig.getContexts();
 
-console.log(kubeContexts);
+// kubectl config current-context
+const currentContext = kubeConfig.getCurrentContext();
+
+const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
+
+(async () => {
+  // kubectl get namespace
+  const namespacesResponse = await apiClient.listNamespace();
+  const namespaces = namespacesResponse.body.items.map(n => n.metadata.name);
+
+  // kubectl get pods -n default
+  const chosenNameSpace = 'default';
+  const podsResponse = await apiClient.listNamespacedPod(chosenNameSpace);
+  const podsInNamespace = podsResponse.body.items.map(p => p.metadata.name);
+
+  console.log({kubeContexts, currentContext, namespaces, chosenNameSpace, podsInNamespace });
+})();
