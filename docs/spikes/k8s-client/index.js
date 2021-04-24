@@ -55,7 +55,18 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
 
   // With file streams
   const fs = require('fs');
-  const inStream = fs.createReadStream('in-file.txt');
+  const Stream = require('stream');
+  const Readable = Stream.Readable;
+  const Writable = Stream.Writable;
+
+
+  const inStream = new Readable({
+    objectMode: true,
+    read(){
+      console.log("reading");
+    }
+  });
+
   const outStream = fs.createWriteStream('out-file.txt');
   const errorStream = fs.createWriteStream('error-file.txt');
   // inStream.setEncoding('utf8');
@@ -63,7 +74,7 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
   const connection = await exec.exec(chosenNameSpace, podName, containerName, 'sh',
     outStream,
     errorStream,
-    process.stdin,
+    inStream,
     true /* tty */,
     (status) => {
       console.log('Exited with status:');
@@ -73,6 +84,14 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
     });
 
   console.log("connection created");
+
+  inStream.push("ls\n");
+  await new Promise(resolve => setTimeout(resolve, 1000));
+
+  inStream.push("exit\n");
+  await new Promise(resolve => setTimeout(resolve, 1000));
+
+  console.log("exited");
 
   connection.onopen(e => {
     console.log("opened", e)
