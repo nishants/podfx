@@ -1,4 +1,5 @@
 import {takeLatest, put, call} from 'redux-saga/effects';
+// import {ipcRenderer} from 'electron';
 
 import {
   LOAD_PROJECT,
@@ -12,6 +13,13 @@ import {
 
 function* executeLoadProjectAction(action){
   try {
+    console.log("hello")
+    console.log(appShell)
+    console.log(window.appShell.messageIds.toShell.GET_KUBECTL_STATUS);
+    window.appShell.sendMessage(window.appShell.messageIds.toShell.GET_KUBECTL_STATUS);
+    window.appShell.on(window.appShell.messageIds.fromShell.SET_KUBECTL_STATUS, (payload, d) => {
+      console.log("kubectl status", d)
+    });
     yield call(alert, "Select a grpc.yml");
     // alert("Select a grpc.yml")
     // yield call(sendTokens, action.payload);

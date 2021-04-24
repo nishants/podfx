@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
+const shell = require('./shell');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -8,9 +9,17 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 
 const createWindow = async () => {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({});
+  const mainWindow = new BrowserWindow({
+    webPreferences: {
+      contextIsolation: true, // Otherwise appShell from preload will not be accessible in dev mode https://www.electronjs.org/docs/tutorial/context-isolation
+      nodeIntegration: true,
+      preload: path.join(__dirname, 'preload.js'),
+    },
+  });
   mainWindow.maximize();
   // Allow using the webpack dev server for local development
+  shell.start(mainWindow);
+
   if(process.env.devUrl){
     mainWindow.loadURL(process.env.devUrl);
     mainWindow.webContents.openDevTools();
