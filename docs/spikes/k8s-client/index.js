@@ -59,7 +59,7 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
     }
   });
 
-  const connection = await exec.exec(chosenNameSpace, podName, containerName, 'sh',
+  const connection = await exec.exec(chosenNameSpace, podName, containerName, 'bash',
     outStream,
     errorStream,
     inStream,
@@ -72,7 +72,7 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
       connection.terminate();
     });
 
-  inStream.push("ls\n");
-  inStream.push("exit\n");
+  inStream.push("ls -a #end\n");
+  inStream.push("exit #end\n");
    // console.log({kubeContexts, currentContext, namespaces, chosenNameSpace, podsInNamespace, chosenPodName, container });
 })();
