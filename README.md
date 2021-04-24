@@ -42,3 +42,4 @@
 - K8s NodeJs API: https://github.com/kubernetes-client/javascript
 - How kubectl exec works : https://erkanerol.github.io/post/how-kubectl-exec-works/
 - exec implentation in node : https://github.com/kubernetes-client/javascript/blob/master/src/exec.ts
+- exec example with nodejs: https://github.com/kubernetes-client/javascript/blob/master/examples/typescript/exec/exec-example.ts

@@ -24,7 +24,33 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
   const podsInNamespace = podsResponse.body.items.map(p => p.metadata.name);
 
   const chosenPodName = podsResponse.body.items[0];
-  const containersInPod = chosenPodName.spec.containers[0];
+  const container = chosenPodName.spec.containers[0];
 
-  console.log({kubeContexts, currentContext, namespaces, chosenNameSpace, podsInNamespace, chosenPodName, containersInPod });
+  const podName = chosenPodName.metadata.name;
+  const containerName = container.name;
+
+  // This will not work : https://github.com/kubernetes-client/javascript/issues/551#issuecomment-725781047
+  // const execResult = await apiClient.connectGetNamespacedPodAttach(
+  //   podName,
+  //   chosenNameSpace,
+  //   // containerName,
+  // ).catch(e => {
+  //   console.error('Failed to connect with pod : ', e.response.body);
+  // });
+
+  // Exec using current context
+  const exec = new k8s.Exec(kubeConfig);
+  const command = "sh";
+
+  const connection = await exec.exec(chosenNameSpace, podName, containerName, command,
+    process.stdout,
+    process.stderr,
+    process.stdin,
+    true /* tty */,
+    (status) => {
+      console.log('Exited with status:');
+      console.log(JSON.stringify(status, null, 2));
+    });
+
+  console.log({kubeContexts, currentContext, namespaces, chosenNameSpace, podsInNamespace, chosenPodName, container });
 })();
