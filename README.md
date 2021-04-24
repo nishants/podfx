@@ -31,7 +31,9 @@
 - [x] connect to a cluster
 - [x] list namespaces in a cluster 
 - [x] list pods in a cluster
+- [x] get containers on a pod
 - [ ] run kubectul exec in a node program
+- [ ] handle containers with sidecar
 
 
 

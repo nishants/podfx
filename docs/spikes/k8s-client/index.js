@@ -23,5 +23,8 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
   const podsResponse = await apiClient.listNamespacedPod(chosenNameSpace);
   const podsInNamespace = podsResponse.body.items.map(p => p.metadata.name);
 
-  console.log({kubeContexts, currentContext, namespaces, chosenNameSpace, podsInNamespace });
+  const chosenPodName = podsResponse.body.items[0];
+  const containersInPod = chosenPodName.spec.containers[0];
+
+  console.log({kubeContexts, currentContext, namespaces, chosenNameSpace, podsInNamespace, chosenPodName, containersInPod });
 })();
