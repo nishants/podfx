@@ -42,15 +42,47 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
   const exec = new k8s.Exec(kubeConfig);
   const command = "sh";
 
-  const connection = await exec.exec(chosenNameSpace, podName, containerName, command,
-    process.stdout,
-    process.stderr,
+  // With standard stream
+  // const connection = await exec.exec(chosenNameSpace, podName, containerName, command,
+  //   process.stdout,
+  //   process.stderr,
+  //   process.stdin,
+  //   true /* tty */,
+  //   (status) => {
+  //     console.log('Exited with status:');
+  //     console.log(JSON.stringify(status, null, 2));
+  //   });
+
+  // With file streams
+  const fs = require('fs');
+  const inStream = fs.createReadStream('in-file.txt');
+  const outStream = fs.createWriteStream('out-file.txt');
+  const errorStream = fs.createWriteStream('error-file.txt');
+  // inStream.setEncoding('utf8');
+
+  const connection = await exec.exec(chosenNameSpace, podName, containerName, 'sh',
+    outStream,
+    errorStream,
     process.stdin,
     true /* tty */,
     (status) => {
       console.log('Exited with status:');
       console.log(JSON.stringify(status, null, 2));
+      connection.close();
+      connection.terminate();
     });
 
-  console.log({kubeContexts, currentContext, namespaces, chosenNameSpace, podsInNamespace, chosenPodName, container });
+  console.log("connection created");
+
+  connection.onopen(e => {
+    console.log("opened", e)
+  });
+  // connection.onclose(e => {
+  //   console.log("closed", e)
+  // });
+  connection.onmessage(e => {
+    console.log("message received", e)
+  });
+
+  // console.log({kubeContexts, currentContext, namespaces, chosenNameSpace, podsInNamespace, chosenPodName, container });
 })();

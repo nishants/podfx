@@ -32,7 +32,12 @@
 - [x] list namespaces in a cluster 
 - [x] list pods in a cluster
 - [x] get containers on a pod
-- [ ] run kubectul exec in a node program
+- [x] run kubectul exec in a node program
+- [ ] run exec with file streams
+- [ ] run exec with custom streams
+- [ ] create custom streams
+- [ ] test spike with a cluster on AKS
+- [ ] test spike on a with oauth protected api
 - [ ] handle containers with sidecar
 
 
@@ -43,3 +48,4 @@
 - How kubectl exec works : https://erkanerol.github.io/post/how-kubectl-exec-works/
 - exec implentation in node : https://github.com/kubernetes-client/javascript/blob/master/src/exec.ts
 - exec example with nodejs: https://github.com/kubernetes-client/javascript/blob/master/examples/typescript/exec/exec-example.ts
+- streams in nodejs : https://nodesource.com/blog/understanding-streams-in-nodejs/
