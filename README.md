@@ -28,18 +28,35 @@
 ### Todo 
 
 - [x] detect all cluster in local kubectl config
+
 - [x] connect to a cluster
+
 - [x] list namespaces in a cluster 
+
 - [x] list pods in a cluster
+
 - [x] get containers on a pod
+
 - [x] run kubectul exec in a node program
+
 - [x] run exec with file streams
+
 - [x] run exec with custom streams
-- [ ] test spike with a cluster on AKS
-- [ ] test spike on a with oauth protected api
+
+- [x] test spike with a cluster on AKS
+
+- [ ] test spike on a with oauth protected ap
+
+  > Did not pickup auth token from kubeconfig.
+  >
+  > Need to check this.
+
 - [ ] download a file using exec
+
 - [ ] create a text file using exec
+
 - [ ] create a binary file using exec
+
 - [ ] handle containers with sidecar
 
 
@@ -59,3 +76,4 @@ How to parse console outptuts and map it to a command ?
 - exec implentation in node : https://github.com/kubernetes-client/javascript/blob/master/src/exec.ts
 - exec example with nodejs: https://github.com/kubernetes-client/javascript/blob/master/examples/typescript/exec/exec-example.ts
 - streams in nodejs : https://nodesource.com/blog/understanding-streams-in-nodejs/
+- cp implementation in api: https://github.com/kubernetes-client/javascript/blob/master/src/cp.ts

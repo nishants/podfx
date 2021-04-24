@@ -11,6 +11,9 @@ const kubeContexts = kubeConfig.getContexts();
 // kubectl config current-context
 const currentContext = kubeConfig.getCurrentContext();
 
+const selectedCluster = 'minikube';
+kubeConfig.setCurrentContext(selectedCluster);
+
 const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
 
 (async () => {
@@ -49,9 +52,7 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
     objectMode: true,
     write(data, _, done){
       const utf8 = data.toString('utf-8');
-      if(!shouldIgnoreLine(utf8)){
-        output.push(utf8);
-      }
+      output.push(utf8);
       done();
     }
   });
@@ -65,7 +66,8 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
     }
   });
 
-  const connection = await exec.exec(chosenNameSpace, podName, containerName, 'bash',
+  const directory = '/app';
+  const connection = await exec.exec(chosenNameSpace, podName, containerName, ['ls','-l' , directory],
     outStream,
     errorStream,
     inStream,
@@ -76,10 +78,13 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
       console.log({output, errors});
       connection.close();
       connection.terminate();
-    });
+    }).catch(e => {
+      console.error(e)
+  });
 
-  inStream.push("ls -l -a #\n");
-  inStream.push("\n");
-  inStream.push("exit #\n");
+  // inStream.push("cd / \n");
+  // inStream.push("ls -l -a #\n");
+  // inStream.push("\n");
+  // inStream.push("exit #\n");
    // console.log({kubeContexts, currentContext, namespaces, chosenNameSpace, podsInNamespace, chosenPodName, container });
 })();
