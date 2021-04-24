@@ -28,7 +28,10 @@
 ### Todo 
 
 - [ ] detect all cluster in local kubectl config
-- [ ] connect to a cluster and run kubectul exec in a node program
+- [ ] connect to a cluster
+- [ ] list namespaces in a cluster 
+- [ ] list pods in a cluster
+- [ ] run kubectul exec in a node program
 
 
 
@@ -36,3 +39,4 @@
 
 - K8s NodeJs API: https://github.com/kubernetes-client/javascript
 - How kubectl exec works : https://erkanerol.github.io/post/how-kubectl-exec-works/
+- exec implentation in node : https://github.com/kubernetes-client/javascript/blob/master/src/exec.ts
