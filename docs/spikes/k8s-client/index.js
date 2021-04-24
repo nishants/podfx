@@ -29,47 +29,35 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
   const podName = chosenPodName.metadata.name;
   const containerName = container.name;
 
-  // This will not work : https://github.com/kubernetes-client/javascript/issues/551#issuecomment-725781047
-  // const execResult = await apiClient.connectGetNamespacedPodAttach(
-  //   podName,
-  //   chosenNameSpace,
-  //   // containerName,
-  // ).catch(e => {
-  //   console.error('Failed to connect with pod : ', e.response.body);
-  // });
-
-  // Exec using current context
   const exec = new k8s.Exec(kubeConfig);
-  const command = "sh";
-
-  // With standard stream
-  // const connection = await exec.exec(chosenNameSpace, podName, containerName, command,
-  //   process.stdout,
-  //   process.stderr,
-  //   process.stdin,
-  //   true /* tty */,
-  //   (status) => {
-  //     console.log('Exited with status:');
-  //     console.log(JSON.stringify(status, null, 2));
-  //   });
-
-  // With file streams
-  const fs = require('fs');
   const Stream = require('stream');
   const Readable = Stream.Readable;
   const Writable = Stream.Writable;
-
+  const output = [];
+  const errors = [];
 
   const inStream = new Readable({
     objectMode: true,
-    read(){
-      console.log("reading");
+    read(){}
+  });
+
+  const outStream = new Writable({
+    objectMode: true,
+    write(data, _, done){
+      const utf8 = data.toString('utf-8');
+      output.push(utf8);
+      done();
     }
   });
 
-  const outStream = fs.createWriteStream('out-file.txt');
-  const errorStream = fs.createWriteStream('error-file.txt');
-  // inStream.setEncoding('utf8');
+  const errorStream = new Writable({
+    objectMode: true,
+    write(data, _, done){
+      const utf8 = data.toString('utf-8');
+      errors.push(utf8);
+      done();
+    }
+  });
 
   const connection = await exec.exec(chosenNameSpace, podName, containerName, 'sh',
     outStream,
@@ -79,29 +67,12 @@ const apiClient = kubeConfig.makeApiClient(k8s.CoreV1Api);
     (status) => {
       console.log('Exited with status:');
       console.log(JSON.stringify(status, null, 2));
+      console.log({output, errors});
       connection.close();
       connection.terminate();
     });
 
-  console.log("connection created");
-
   inStream.push("ls\n");
-  await new Promise(resolve => setTimeout(resolve, 1000));
-
   inStream.push("exit\n");
-  await new Promise(resolve => setTimeout(resolve, 1000));
-
-  console.log("exited");
-
-  connection.onopen(e => {
-    console.log("opened", e)
-  });
-  // connection.onclose(e => {
-  //   console.log("closed", e)
-  // });
-  connection.onmessage(e => {
-    console.log("message received", e)
-  });
-
-  // console.log({kubeContexts, currentContext, namespaces, chosenNameSpace, podsInNamespace, chosenPodName, container });
+   // console.log({kubeContexts, currentContext, namespaces, chosenNameSpace, podsInNamespace, chosenPodName, container });
 })();
