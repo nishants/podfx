@@ -14,17 +14,8 @@ import {
 function* executeLoadProjectAction(action){
   try {
     console.log("hello")
-    console.log(appShell)
-    console.log(window.appShell.messageIds.toShell.GET_KUBECTL_STATUS);
-    window.appShell.sendMessage(window.appShell.messageIds.toShell.GET_KUBECTL_STATUS);
-    window.appShell.on(window.appShell.messageIds.fromShell.SET_KUBECTL_STATUS, (payload, d) => {
-      console.log("kubectl status", d)
-    });
-    yield call(alert, "Select a grpc.yml");
-    // alert("Select a grpc.yml")
-    // yield call(sendTokens, action.payload);
-    // yield put(tokenTransferred());
-    // yield put(fetchWallet());
+    const response = yield call(window.appShell.apiClient.getKubeConfig);
+    console.log("response from client interface : ", response);
   } catch (e) {
     // alert(`Somthing went wrong ${e.message}`);
   }

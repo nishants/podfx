@@ -1,6 +1,11 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
-const shell = require('./shell');
+
+const shell = require('./messages/createShell');
+
+const lib = {
+  getKubeConfig: async () => "kubeconfig from lib mock"
+};
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -18,7 +23,7 @@ const createWindow = async () => {
   });
   mainWindow.maximize();
   // Allow using the webpack dev server for local development
-  shell.start(mainWindow);
+  shell.start(mainWindow, lib);
 
   if(process.env.devUrl){
     mainWindow.loadURL(process.env.devUrl);
