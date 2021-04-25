@@ -3,9 +3,7 @@ const path = require('path');
 
 const shell = require('./messages/createShell');
 
-const lib = {
-  getKubeConfig: async () => "kubeconfig from lib mock"
-};
+const lib = require("podfx")
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
