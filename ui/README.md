@@ -1,14 +1,14 @@
-[![Build Status](https://saxouniversity.visualstudio.com/stgo-vscode/_apis/build/status/nishants.stgo-vscode?branchName=master)](https://saxouniversity.visualstudio.com/stgo-vscode/_build/latest?definitionId=11&branchName=master)
+**How to run with shell**
 
-![](./docs/images/wtfpl-badge.png)
+- With hot reload
 
-Development build ui (wihtout minification ): `NODE_ENV=dev yarn build:ui`
+  Run `yarn start` in ui and `yarn start` in shell. This will run ui with hot reload. It opens ui using webpack-dev-server as a url.
 
-End to end testing tool : https://github.com/redhat-developer/vscode-extension-tester
+- Packge app on local
 
+  Run `yarn build` in ui and `yarn make` in app. The fiest command will output build in `../app/assets` so it can be packed with client
 
+- On ci
 
-Download latest build from master : https://stgovscode.z22.web.core.windows.net/downloads/branch/master/stgo-vscode.vsix
-
-Or, change link to download package from a specific branch: https://stgovscode.z22.web.core.windows.net/downloads/branch/{branch-name}/stgo-vscode.vsix
+  Run `yarn build:prod` and copy asseets into `../app/assets`
 
