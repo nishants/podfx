@@ -5,16 +5,16 @@ pr:
 - master
 
 stages:
-  - stage: BuildCore
-    displayName: "core/build.yml"
-    jobs:
-      - job: BuildCore
-        displayName: "Build grpc-devtool"
-        timeoutInMinutes: 10
-        pool:
-          vmImage: 'ubuntu-18.04'
-        steps:
-          - template: core/build.yml
+#  - stage: BuildCore
+#    displayName: "core/build.yml"
+#    jobs:
+#      - job: BuildCore
+#        displayName: "Build grpc-devtool"
+#        timeoutInMinutes: 10
+#        pool:
+#          vmImage: 'ubuntu-18.04'
+#        steps:
+#          - template: core/build.yml
 
   - stage: BuildUi
     displayName: "ui/build.yml"
