@@ -53,7 +53,7 @@
 
 - [ ] create ui interactions with mocks
 
-  - [ ] promise based shell interaction in electron
+  - [x] promise based shell interaction in electron
   - [ ] kubectl found
   - [ ] kubectul not found, select file
   - [ ] select cluster
