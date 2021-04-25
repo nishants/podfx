@@ -51,6 +51,17 @@
   >
   > Need to check this.
 
+- [ ] create ui interactions with mocks
+
+  - [ ] promise based shell interaction in electron
+  - [ ] kubectl found
+  - [ ] kubectul not found, select file
+  - [ ] select cluster
+  - [ ] select namepsace
+  - [ ] select pod
+  - [ ] select cluster
+  - [ ] update files dynamically in ui
+
 - [ ] download a file using exec
 
 - [ ] create a text file using exec

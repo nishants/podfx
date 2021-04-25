@@ -5,6 +5,9 @@ const kubeConfig = new k8s.KubeConfig();
 // Load default context
 kubeConfig.loadFromDefault();
 
+// Load from file
+//kubeConfig.loadFromFile();
+
 // kubectl config get-contexts
 const kubeContexts = kubeConfig.getContexts();
 
