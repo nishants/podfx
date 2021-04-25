@@ -1,6 +1,6 @@
 # Pod File Explorer
 
-
+[![Build Status](https://dev.azure.com/nishantsingh870743/PodFx/_apis/build/status/nishants.podfx?branchName=master)](https://dev.azure.com/nishantsingh870743/PodFx/_build/latest?definitionId=3&branchName=master)
 
 ### Idea
 
@@ -54,6 +54,7 @@
 - [ ] create ui interactions with mocks
 
   - [x] promise based shell interaction in electron
+  - [ ] create a tree explorer ui
   - [ ] kubectl found
   - [ ] kubectul not found, select file
   - [ ] select cluster

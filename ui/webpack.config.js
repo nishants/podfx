@@ -12,7 +12,7 @@ const devServer = isDevelopmentBuild ? {
 module.exports = {
   devServer,
   entry: {
-    "main": "./ui/index.js",
+    "main": "./src/index.js",
   },
   output: {
     path: isDevelopmentBuild ? path.join(__dirname, '..', 'app', 'assets'): path.join(__dirname, 'dist'),
@@ -70,7 +70,7 @@ module.exports = {
   },
   plugins: [
     new HTMLWebpackPlugin({
-      template: './ui/index.html',
+      template: './src/index.html',
       inlineSource: '.(js|css)$'
     }),
     new HtmlWebpackInlineSourcePlugin()
