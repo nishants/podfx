@@ -7,6 +7,7 @@
   "scripts": {
     "driver": "node features/js/driver/index.js",
     "start": "cross-env yarn add ../lib && devUrl=http://localhost:9000/ electron-forge start",
+    "test": "cross-env echo \"No tests yet\"",
     "package:dev": "cross-env yarn add ../lib && electron-forge package",
     "package": "electron-forge package",
     "make": "electron-forge make",
