@@ -192,7 +192,7 @@ How to parse console outptuts and map it to a command ?
 - 
 
   ```
-  window.appShell.apiClient.getKubeConfig().then(console.log)
+  window.appShell.apiClient.loadContext().then(console.log)
   ```
 
   
