@@ -8,9 +8,8 @@ const Form = ({clusters, kubeContext, namespaces, pods, loadKubeContext, getName
   const [currentNamespace, setCurrentNamespace] = React.useState(null);
   const [currentPod, setCurrentPod] = React.useState(null);
   const [currentContainer, setCurrentContainer] = React.useState(null);
-  const [files, setFiles] = React.useState([]);
 
-  const openFiles = (path = "/") => {
+  const getFiles = (path = "/") => {
     const params = {
       kubeContextName : kubeContext,
       namespace: currentNamespace.name,
@@ -18,11 +17,8 @@ const Form = ({clusters, kubeContext, namespaces, pods, loadKubeContext, getName
       containerName: currentContainer.name,
       path
     };
-    debugger;
-    window.appShell.apiClient.getFiles(params).then((files) => {
-      console.log({files});
-      setFiles(files);
-    }).catch(e => alert(`Failed to get files ${e.message}`))
+    return window.appShell.apiClient.getFiles(params)
+      .catch(e => alert(`Failed to get files ${e.message}`))
   };
 
   // Load default kube context
@@ -44,11 +40,17 @@ const Form = ({clusters, kubeContext, namespaces, pods, loadKubeContext, getName
     }
   }, [currentNamespace]);
 
-  React.useEffect(() => {
-    if(currentContainer){
-      openFiles();
-    }
-  }, [currentContainer]);
+  // React.useEffect(() => {
+  //   if(currentContainer){
+  //     openFiles();
+  //   }
+  // }, [currentContainer]);
+
+  const fileExplorer = currentContainer ? (
+    <Files
+      getFiles={getFiles}
+    />
+  ) : null;
 
   return (
     <div>
@@ -88,10 +90,8 @@ const Form = ({clusters, kubeContext, namespaces, pods, loadKubeContext, getName
         currentContainer: currentContainer?.name
       })}
 
-      <Files
-        files={files}
-        openDirectory={openFiles}
-      />
+      { fileExplorer }
+
     </div>
   );
 }
