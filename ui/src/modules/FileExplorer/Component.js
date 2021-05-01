@@ -2,7 +2,7 @@ import React from 'react';
 import KubeContext from './KubeContext/Component';
 import Select from '../Shared/Select';
 
-const Form = ({clusters, kubeContext, loadKubeContext, getNameSpaces}) => {
+const Form = ({clusters, kubeContext, namespaces, loadKubeContext, getNameSpaces, getPods}) => {
   const [currentCluster, setCurrentCluster] = React.useState(null);
   const [currentNamespace, setCurrentNamespace] = React.useState(null);
   const [currentPod, setCurrentPod] = React.useState(null);
@@ -21,6 +21,13 @@ const Form = ({clusters, kubeContext, loadKubeContext, getNameSpaces}) => {
     }
   }, [currentCluster]);
 
+  // Load default kube context
+  React.useEffect(() => {
+    if(currentCluster){
+      getPods(kubeContext, currentCluster, currentNamespace);
+    }
+  }, [currentNamespace]);
+
   return (
     <div>
       <KubeContext
@@ -35,7 +42,7 @@ const Form = ({clusters, kubeContext, loadKubeContext, getNameSpaces}) => {
       />
 
       <Select
-        values={currentCluster?.namespaces || []}
+        values={namespaces || []}
         onChange={setCurrentNamespace}
         value={currentNamespace}
       />

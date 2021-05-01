@@ -3,7 +3,9 @@ import {
   LOAD_KUBE_CONTEXT,
 
   GET_NAMESPACES,
-  SET_NAMESPACES
+  SET_NAMESPACES,
+
+  GET_PODS
 } from './workspace.action.types';
 
 export const setKubeContextAndClusters = (payload) => {
@@ -24,6 +26,13 @@ export const getNameSpaces = (kubeContext, cluster) => {
   return {
     type: GET_NAMESPACES,
     payload: {kubeContext, cluster}
+  };
+};
+
+export const getPods = (kubeContext, cluster, namespace) => {
+  return {
+    type: GET_PODS,
+    payload: {kubeContext, cluster, namespace}
   };
 };
 

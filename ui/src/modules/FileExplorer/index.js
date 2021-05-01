@@ -5,7 +5,8 @@ import FileExplorer from './Component';
 
 import {
   loadKubeContext,
-  getNameSpaces
+  getNameSpaces,
+  getPods
 } from "../workspace/workspace.actions"
 
 const mapStateToProps = (state) => {
@@ -16,6 +17,7 @@ const mapDispatchToProps = dispatch => {
   return {
     loadKubeContext: (path) => dispatch(loadKubeContext(path)),
     getNameSpaces: (kubeContext, cluster) => dispatch(getNameSpaces(kubeContext, cluster)),
+    getPods: (kubeContext, cluster, namespace) => dispatch(getPods(kubeContext, cluster, namespace)),
   }
 }
 

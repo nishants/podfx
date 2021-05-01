@@ -4,6 +4,7 @@ const shellApis = {
   loadContext: require('./loadContext'),
   fileSelector: require('./fileSelector'),
   getNamespaces: require('./getNamespaces'),
+  getPods: require('./getPods'),
 };
 
 const startShell = (appWindow, lib) => {
