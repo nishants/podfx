@@ -1,11 +1,20 @@
 import {useState} from 'react';
 
+const createNamespaces = (clusterName) => {
+  return [
+    {name: "namespace-1" + clusterName},
+    {name: "namespace-2" + clusterName},
+    {name: "namespace-3" + clusterName},
+    {name: "namespace-4" + clusterName},
+  ]
+};
+
 const nullWorkspace = {
   path : "/users/nish/kubeconfig.js",
   clusters: [
-    {name: "cluster-one"},
-    {name: "cluster-two"},
-    {name: "cluster-three"},
+    {name: "cluster-one", namespaces: createNamespaces("one")},
+    {name: "cluster-two", namespaces: createNamespaces("two")},
+    {name: "cluster-three", namespaces: createNamespaces("three")},
   ]
 };
 
@@ -39,9 +48,9 @@ export async function selectWorkspace(defualtDir) {
   window.setWorkspace({
     path : path,
     clusters: [
-      {name: "cluster-one"},
-      {name: "cluster-two"},
-      {name: "cluster-three"},
+      {name: "cluster-one"  , namespaces: createNamespaces("one-" + random)},
+      {name: "cluster-two"  , namespaces: createNamespaces("two-" + random)},
+      {name: "cluster-three", namespaces: createNamespaces("three-" + random)},
     ].map(c => {
       return {...c, name: c.name + random}
     })

@@ -6,6 +6,7 @@ import Select from '../Shared/Select';
 const Form = () => {
   const workspace = useWorkspace();
   const [currentCluster, setCurrentCluster] = React.useState(null);
+  const [currentNamespace, setCurrentNamespace] = React.useState(null);
 
   return (
     <div>
@@ -16,7 +17,14 @@ const Form = () => {
         onChange={setCurrentCluster}
         value={currentCluster}
       />
-      {JSON.stringify({workspace, currentCluster})}
+
+      <Select
+        values={currentCluster?.namespaces || []}
+        onChange={setCurrentNamespace}
+        value={currentNamespace}
+      />
+
+      {JSON.stringify({currentCluster, currentNamespace})}
     </div>
   );
 }
