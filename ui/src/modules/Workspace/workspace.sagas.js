@@ -17,15 +17,17 @@ function* executeLoadKubeContext(action){
     alert(`Failed loadin kube context : ${e.message}`);
   }
 }
+
 function* executeGetNamespaces(action){
   try {
-    debugger;
-    const contextName = action.payload.kubeContext;
+    const kubeContextName = action.payload.kubeContext;
     const clusterName = action.payload.cluster.name;
-    // const response = yield call(window.appShell.apiClient.loadContext, action.path);
+    debugger;
+    const response = yield call(window.appShell.apiClient.getNamespaces, {kubeContextName, clusterName});
+    console.log(response)
     // yield put(setKubeContextAndClusters(response));
   } catch (e) {
-    alert(`Failed loadin kube context : ${e.message}`);
+    alert(`Failed to get namespaces : ${e.message}`);
   }
 }
 
