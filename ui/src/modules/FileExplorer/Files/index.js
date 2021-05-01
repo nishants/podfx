@@ -13,7 +13,15 @@ const Files = ({getFiles}) => {
   }, [currentPath]);
 
   const select = (file) => {
-    console.log("Selected : ", file);
+    if(file.isDir){
+      setCurrentPath(`${currentPath}${file.name}/`);
+    }
+  };
+
+  const goBack = () => {
+    // current path ends with "/"
+    const parentPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+    setCurrentPath(parentPath);
   }
 
   const items = filesOnCurrentPath.map((file) => {
@@ -25,9 +33,15 @@ const Files = ({getFiles}) => {
   });
 
   return (
-    <ul>
-      {items}
-    </ul>
+    <div className="file-explorer">
+      <div>
+        <div>PWD: ({currentPath})</div>
+        <button onClick={goBack}>Back</button>
+      </div>
+      <ul>
+        {items}
+      </ul>
+    </div>
   );
 }
 
