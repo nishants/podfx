@@ -1,12 +1,29 @@
 import React from 'react';
 import KubeContext from './KubeContext/Component';
 import Select from '../Shared/Select';
+import Files from './Files';
 
 const Form = ({clusters, kubeContext, namespaces, pods, loadKubeContext, getNameSpaces, getPods}) => {
   const [currentCluster, setCurrentCluster] = React.useState(null);
   const [currentNamespace, setCurrentNamespace] = React.useState(null);
   const [currentPod, setCurrentPod] = React.useState(null);
   const [currentContainer, setCurrentContainer] = React.useState(null);
+  const [files, setFiles] = React.useState([]);
+
+  const openFiles = (path = "/") => {
+    const params = {
+      kubeContextName : kubeContext,
+      namespace: currentNamespace.name,
+      podName: currentPod.name,
+      containerName: currentContainer.name,
+      path
+    };
+    debugger;
+    window.appShell.apiClient.getFiles(params).then((files) => {
+      console.log({files});
+      setFiles(files);
+    }).catch(e => alert(`Failed to get files ${e.message}`))
+  };
 
   // Load default kube context
   React.useEffect(() => {
@@ -29,7 +46,7 @@ const Form = ({clusters, kubeContext, namespaces, pods, loadKubeContext, getName
 
   React.useEffect(() => {
     if(currentContainer){
-      alert("Open file browser.")
+      openFiles();
     }
   }, [currentContainer]);
 
@@ -70,6 +87,11 @@ const Form = ({clusters, kubeContext, namespaces, pods, loadKubeContext, getName
         currentPod: currentPod?.name,
         currentContainer: currentContainer?.name
       })}
+
+      <Files
+        files={files}
+        openDirectory={openFiles}
+      />
     </div>
   );
 }
