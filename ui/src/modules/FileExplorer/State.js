@@ -20,9 +20,19 @@ window.setWorkspace = (updated) => {
   workspace.callbacks.forEach((callback) => callback(updated));
 }
 
-export function selectWorkspace(filePath) {
+export async function selectWorkspace(defualtDir) {
+  // Use below link for options :
+  // https://www.electronjs.org/docs/api/dialog#dialogshowopendialogbrowserwindow-options
+
+  const dialogConfig = {
+    title: 'Select Kube Config',
+    buttonLabel: 'Select Config',
+    properties:['openFile', 'multiSelections', 'showHiddenFiles']
+  };
+  const result = await window.appShell.apiClient.fileSelector({dialogConfig});
+  const path = result.filePaths.pop();
   window.setWorkspace({
-    path : filePath.target.value,
+    path : path,
     clusters: {count : parseInt(Math.random() * 10)}
   });
 };

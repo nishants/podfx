@@ -9,7 +9,7 @@ const KubeContext = () => {
     <div className='kube-context'>
       <label>KubeConfig:</label>
       <span>{workspace.path}({workspace.clusters.count})</span>
-      <input type='file' onChange={selectWorkspace}/>
+      <button onClick={selectWorkspace}>Select</button>
     </div>
   );
 }

@@ -5,7 +5,7 @@ const { dialog } = require('electron')
 
 
 const execute = async (context, payload) => {
-  return dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] });
+  return dialog.showOpenDialog(payload.dialogConfig);
 };
 
 module.exports = {
