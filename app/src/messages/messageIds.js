@@ -3,6 +3,7 @@ const toShell = {
   SELECT_FILE: 'to-messages/SELECT_FILE',
   GET_NAMESPACES: 'to-messages/GET_NAMESPACES',
   GET_PODS: 'to-messages/GET_PODS',
+  GET_FILES: 'to-messages/GET_FILES',
 };
 
 const fromShell = {
@@ -10,6 +11,7 @@ const fromShell = {
   SET_SELECTED_FILE: 'from-messages/SET_SELECTED_FILE',
   GET_NAMESPACES: 'from-messages/GET_NAMESPACES',
   GET_PODS: 'from-messages/GET_PODS',
+  GET_FILES: 'from-messages/GET_FILES',
 };
 
 module.exports = {

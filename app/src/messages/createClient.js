@@ -5,6 +5,7 @@ const clientApis = {
   fileSelector: require('./fileSelector'),
   getNamespaces: require('./getNamespaces'),
   getPods: require('./getPods'),
+  getFiles: require('./getFiles'),
 };
 
 module.exports = {
