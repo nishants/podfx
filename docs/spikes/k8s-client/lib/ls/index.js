@@ -18,17 +18,17 @@ const getFiles = (exec, chosenNameSpace, podName, containerName, path = "/") => 
   });
 
   const convertToFiles = (line) => {
-    const tokens = line.split(" ");
-    if(tokens.length < 7){
+    const tokens = line.trim().replace(/\s\s+/g, ' ').split(" ");
+    // Remove lines for total 992K", and for .. and .
+    if(tokens.length < 7 || tokens[tokens.length - 1].endsWith("./")){
       return null;
     }
-    const size = tokens[4];
-    const time = `${tokens[5]} ${tokens[6]} ${tokens[7]}`;
-    const name = tokens.slice(8).join(" ");
-    if(name.endsWith("./")){
-      return null;
-    }
-    return tokens.slice(4).join(" ").trim();
+    const cleaned =  tokens.slice(4);
+
+    const size = cleaned[0];
+    const time = `${cleaned[1]} ${cleaned[2]} ${cleaned[3]}`;
+    const name = cleaned.slice(4).join(" ");
+
     return {
       size,
       time,

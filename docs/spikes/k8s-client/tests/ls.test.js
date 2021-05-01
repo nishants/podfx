@@ -8,26 +8,101 @@ const examples = {
       "\r\n-rw-r--r-- 1 root root  166 Nov  8 09:27  appsettings.Development.json\r\n-rw-r--r-- 1 root root  261 Nov  8 09:27  appsettings.json\r\ndrwxr-xr-x 2 root root 4.0K Apr 24 11:33  dir/\r\ndrwxr-xr-x 2 root root 4.0K Apr 24 11:33  hello/\r\ndrwxr-xr-x 2 root root 4.0K Apr 24 16:46 'hello world'/\r\n-rw-r--r-- 1 root root  483 Nov  8 11:22  web.config\r\n"
     ],
     expectedFiles : [
-      // "total 992K",
-      "355K Dec 13  2019  Google.Protobuf.dll*",
-      "22K Feb  7  2020  Grpc.AspNetCore.Server.ClientFactory.dll*",
-      "124K Feb  7  2020  Grpc.AspNetCore.Server.dll*",
-      "50K Feb  4  2020  Grpc.Core.Api.dll*",
-      "87K Feb  7  2020  Grpc.Net.Client.dll*",
-      "30K Feb  7  2020  Grpc.Net.ClientFactory.dll*",
-      "18K Feb  7  2020  Grpc.Net.Common.dll*",
-      "89K Nov  8 11:22  Service*",
-      "114K Nov  8 11:22  Service.deps.json",
-      "21K Nov  8 11:22  Service.dll",
-      "24K Nov  8 11:22  Service.pdb",
-      "213 Nov  8 11:22  Service.runtimeconfig.json",
-      "4.0K Apr 24 16:08  alpha/",
-      "166 Nov  8 09:27  appsettings.Development.json",
-      "261 Nov  8 09:27  appsettings.json",
-      "4.0K Apr 24 11:33  dir/",
-      "4.0K Apr 24 11:33  hello/",
-      "4.0K Apr 24 16:46 'hello world'/",
-      "483 Nov  8 11:22  web.config"
+      {
+        "name": "Google.Protobuf.dll*",
+        "size": "355K",
+        "time": "Dec 13 2019"
+      },
+      {
+        "name": "Grpc.AspNetCore.Server.ClientFactory.dll*",
+        "size": "22K",
+        "time": "Feb 7 2020"
+      },
+      {
+        "name": "Grpc.AspNetCore.Server.dll*",
+        "size": "124K",
+        "time": "Feb 7 2020"
+      },
+      {
+        "name": "Grpc.Core.Api.dll*",
+        "size": "50K",
+        "time": "Feb 4 2020"
+      },
+      {
+        "name": "Grpc.Net.Client.dll*",
+        "size": "87K",
+        "time": "Feb 7 2020"
+      },
+      {
+        "name": "Grpc.Net.ClientFactory.dll*",
+        "size": "30K",
+        "time": "Feb 7 2020"
+      },
+      {
+        "name": "Grpc.Net.Common.dll*",
+        "size": "18K",
+        "time": "Feb 7 2020"
+      },
+      {
+        "name": "Service*",
+        "size": "89K",
+        "time": "Nov 8 11:22"
+      },
+      {
+        "name": "Service.deps.json",
+        "size": "114K",
+        "time": "Nov 8 11:22"
+      },
+      {
+        "name": "Service.dll",
+        "size": "21K",
+        "time": "Nov 8 11:22"
+      },
+      {
+        "name": "Service.pdb",
+        "size": "24K",
+        "time": "Nov 8 11:22"
+      },
+      {
+        "name": "Service.runtimeconfig.json",
+        "size": "213",
+        "time": "Nov 8 11:22"
+      },
+      {
+        "name": "alpha/",
+        "size": "4.0K",
+        "time": "Apr 24 16:08"
+      },
+      {
+        "name": "appsettings.Development.json",
+        "size": "166",
+        "time": "Nov 8 09:27"
+      },
+      {
+        "name": "appsettings.json",
+        "size": "261",
+        "time": "Nov 8 09:27"
+      },
+      {
+        "name": "dir/",
+        "size": "4.0K",
+        "time": "Apr 24 11:33"
+      },
+      {
+        "name": "hello/",
+        "size": "4.0K",
+        "time": "Apr 24 11:33"
+      },
+      {
+        "name": "'hello world'/",
+        "size": "4.0K",
+        "time": "Apr 24 16:46"
+      },
+      {
+        "name": "web.config",
+        "size": "483",
+        "time": "Nov 8 11:22"
+      }
     ]
   }
 }
