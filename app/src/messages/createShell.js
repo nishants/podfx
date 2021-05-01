@@ -6,7 +6,7 @@ const shellApis = {
 };
 
 const startShell = (appWindow, lib) => {
-  const context = {lib};
+  const context = {lib, appWindow};
   for(let apiName in shellApis){
     const api = shellApis[apiName];
     ipcMain.on(api.toShell, async (event, payload) => {

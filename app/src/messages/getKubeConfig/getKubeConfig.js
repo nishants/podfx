@@ -3,11 +3,7 @@ const fromShell = messageIds.fromShell.SET_KUBECTL_STATUS;
 const toShell = messageIds.toShell.GET_KUBECTL_STATUS ;
 
 const execute = async (context, payload) => {
-  const kubeConfig = await context.lib.getKubeConfig();
-  return {
-    kubeConfigFound: !!kubeConfig,
-    content: kubeConfig
-  };
+  return context.lib.loadContext(payload ? payload.kubeConfigPath : null);
 };
 
 module.exports = {
