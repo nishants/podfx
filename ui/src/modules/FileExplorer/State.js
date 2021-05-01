@@ -1,11 +1,22 @@
 import {useState} from 'react';
 
+const createPods = (namespace) => {
+  return [
+    {name: "pod-1-" + namespace},
+    {name: "pod-2-" + namespace},
+    {name: "pod-3-" + namespace},
+    {name: "pod-4-" + namespace},
+    {name: "pod-5-" + namespace},
+    {name: "pod-6-" + namespace},
+  ];
+}
+
 const createNamespaces = (clusterName) => {
   return [
-    {name: "namespace-1" + clusterName},
-    {name: "namespace-2" + clusterName},
-    {name: "namespace-3" + clusterName},
-    {name: "namespace-4" + clusterName},
+    {name: "namespace-1" + clusterName, pods: createPods("one")},
+    {name: "namespace-2" + clusterName, pods: createPods("two")},
+    {name: "namespace-3" + clusterName, pods: createPods("three")},
+    {name: "namespace-4" + clusterName, pods: createPods("four")},
   ]
 };
 

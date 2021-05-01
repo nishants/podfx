@@ -7,6 +7,7 @@ const Form = () => {
   const workspace = useWorkspace();
   const [currentCluster, setCurrentCluster] = React.useState(null);
   const [currentNamespace, setCurrentNamespace] = React.useState(null);
+  const [currentPod, setCurrentPod] = React.useState(null);
 
   return (
     <div>
@@ -24,7 +25,17 @@ const Form = () => {
         value={currentNamespace}
       />
 
-      {JSON.stringify({currentCluster, currentNamespace})}
+      <Select
+        values={currentNamespace?.pods || []}
+        onChange={setCurrentPod}
+        value={currentPod}
+      />
+
+      {JSON.stringify({
+        currentCluster: currentCluster?.name,
+        currentNamespace: currentNamespace?.name,
+        currentPod: currentPod?.name,
+      })}
     </div>
   );
 }
