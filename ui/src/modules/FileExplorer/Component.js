@@ -6,6 +6,7 @@ const Form = ({clusters, kubeContext, namespaces, pods, loadKubeContext, getName
   const [currentCluster, setCurrentCluster] = React.useState(null);
   const [currentNamespace, setCurrentNamespace] = React.useState(null);
   const [currentPod, setCurrentPod] = React.useState(null);
+  const [currentContainer, setCurrentContainer] = React.useState(null);
 
   // Load default kube context
   React.useEffect(() => {
@@ -14,19 +15,23 @@ const Form = ({clusters, kubeContext, namespaces, pods, loadKubeContext, getName
     }
   }, [kubeContext]);
 
-  // Load default kube context
   React.useEffect(() => {
     if(currentCluster){
       getNameSpaces(kubeContext, currentCluster);
     }
   }, [currentCluster]);
 
-  // Load default kube context
   React.useEffect(() => {
     if(currentCluster){
       getPods(kubeContext, currentCluster, currentNamespace);
     }
   }, [currentNamespace]);
+
+  React.useEffect(() => {
+    if(currentContainer){
+      alert("Open file browser.")
+    }
+  }, [currentContainer]);
 
   return (
     <div>
@@ -53,10 +58,17 @@ const Form = ({clusters, kubeContext, namespaces, pods, loadKubeContext, getName
         value={currentPod}
       />
 
+      <Select
+        values={currentPod?.containers || []}
+        onChange={setCurrentContainer}
+        value={currentContainer}
+      />
+
       {JSON.stringify({
         currentCluster: currentCluster?.name,
         currentNamespace: currentNamespace?.name,
         currentPod: currentPod?.name,
+        currentContainer: currentContainer?.name
       })}
     </div>
   );
