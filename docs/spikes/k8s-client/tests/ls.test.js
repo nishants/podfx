@@ -9,96 +9,115 @@ const examples = {
     ],
     expectedFiles : [
       {
-        "name": "Google.Protobuf.dll*",
+        "isDir": false,
+        "name": "Google.Protobuf.dll",
         "size": "355K",
         "time": "Dec 13 2019"
       },
       {
-        "name": "Grpc.AspNetCore.Server.ClientFactory.dll*",
+        "isDir": false,
+        "name": "Grpc.AspNetCore.Server.ClientFactory.dll",
         "size": "22K",
         "time": "Feb 7 2020"
       },
       {
-        "name": "Grpc.AspNetCore.Server.dll*",
+        "isDir": false,
+        "name": "Grpc.AspNetCore.Server.dll",
         "size": "124K",
         "time": "Feb 7 2020"
       },
       {
-        "name": "Grpc.Core.Api.dll*",
+        "isDir": false,
+        "name": "Grpc.Core.Api.dll",
         "size": "50K",
         "time": "Feb 4 2020"
       },
       {
-        "name": "Grpc.Net.Client.dll*",
+        "isDir": false,
+        "name": "Grpc.Net.Client.dll",
         "size": "87K",
         "time": "Feb 7 2020"
       },
       {
-        "name": "Grpc.Net.ClientFactory.dll*",
+        "isDir": false,
+        "name": "Grpc.Net.ClientFactory.dll",
         "size": "30K",
         "time": "Feb 7 2020"
       },
       {
-        "name": "Grpc.Net.Common.dll*",
+        "isDir": false,
+        "name": "Grpc.Net.Common.dll",
         "size": "18K",
         "time": "Feb 7 2020"
       },
       {
-        "name": "Service*",
+        "isDir": false,
+        "name": "Service",
         "size": "89K",
         "time": "Nov 8 11:22"
       },
       {
+        "isDir": false,
         "name": "Service.deps.json",
         "size": "114K",
         "time": "Nov 8 11:22"
       },
       {
+        "isDir": false,
         "name": "Service.dll",
         "size": "21K",
         "time": "Nov 8 11:22"
       },
       {
+        "isDir": false,
         "name": "Service.pdb",
         "size": "24K",
         "time": "Nov 8 11:22"
       },
       {
+        "isDir": false,
         "name": "Service.runtimeconfig.json",
         "size": "213",
         "time": "Nov 8 11:22"
       },
       {
-        "name": "alpha/",
+        "isDir": true,
+        "name": "alpha",
         "size": "4.0K",
         "time": "Apr 24 16:08"
       },
       {
+        "isDir": false,
         "name": "appsettings.Development.json",
         "size": "166",
         "time": "Nov 8 09:27"
       },
       {
+        "isDir": false,
         "name": "appsettings.json",
         "size": "261",
         "time": "Nov 8 09:27"
       },
       {
-        "name": "dir/",
+        "isDir": true,
+        "name": "dir",
         "size": "4.0K",
         "time": "Apr 24 11:33"
       },
       {
-        "name": "hello/",
+        "isDir": true,
+        "name": "hello",
         "size": "4.0K",
         "time": "Apr 24 11:33"
       },
       {
-        "name": "'hello world'/",
+        "isDir": true,
+        "name": "'hello world'",
         "size": "4.0K",
         "time": "Apr 24 16:46"
       },
       {
+        "isDir": false,
         "name": "web.config",
         "size": "483",
         "time": "Nov 8 11:22"
