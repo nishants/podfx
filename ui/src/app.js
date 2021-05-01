@@ -1,5 +1,5 @@
 import React from "react";
-import FileExplorer from './modules/FileExplorer/Component';
+import FileExplorer from './modules/FileExplorer';
 
 const App = () => {
   return (

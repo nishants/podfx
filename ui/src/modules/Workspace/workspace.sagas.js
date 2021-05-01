@@ -1,26 +1,22 @@
 import {takeLatest, put, call} from 'redux-saga/effects';
-// import {ipcRenderer} from 'electron';
 
 import {
-  LOAD_PROJECT,
-  CREATE_PROJECT
+  LOAD_KUBE_CONTEXT
 } from './workspace.action.types';
 
 import {
-  loadProject,
-  createProject
+  setKubeContextAndClusters
 } from './workspace.actions';
 
-function* executeLoadProjectAction(action){
+function* executeLoadKubeContext(action){
   try {
-    console.log("hello")
-    const response = yield call(window.appShell.apiClient.getKubeConfig);
-    console.log("response from client interface : ", response);
+    const response = yield call(window.appShell.apiClient.loadContext, action.path);
+    yield put(setKubeContextAndClusters(response));
   } catch (e) {
-    // alert(`Somthing went wrong ${e.message}`);
+    alert(`Failed loadin kube context : ${e.message}`);
   }
 }
 
 export default function*  workspaceSagas(){
-  yield takeLatest(LOAD_PROJECT, executeLoadProjectAction);
+  yield takeLatest(LOAD_KUBE_CONTEXT, executeLoadKubeContext);
 }

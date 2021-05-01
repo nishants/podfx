@@ -1,20 +1,27 @@
 import React from 'react';
-import {useWorkspace} from './State';
-import KubecontextComponent from './KubeContext/Component';
+import KubeContext from './KubeContext/Component';
 import Select from '../Shared/Select';
 
-const Form = () => {
-  const workspace = useWorkspace();
+const Form = ({clusters, kubeContext, loadKubeContext}) => {
   const [currentCluster, setCurrentCluster] = React.useState(null);
   const [currentNamespace, setCurrentNamespace] = React.useState(null);
   const [currentPod, setCurrentPod] = React.useState(null);
 
+  // Load default kube context
+  React.useEffect(() => {
+    if(!kubeContext){
+      loadKubeContext();
+    }
+  }, [kubeContext]);
+
   return (
     <div>
-      <h1>My Form</h1>
-      <KubecontextComponent/>
+      <KubeContext
+        path={kubeContext?.name}
+        selectWorkspace={loadKubeContext}
+      />
       <Select
-        values={workspace.clusters}
+        values={clusters}
         onChange={setCurrentCluster}
         value={currentCluster}
       />

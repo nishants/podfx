@@ -1,11 +1,14 @@
-import {  CREATE_PROJECT, LOAD_PROJECT} from './workspace.action.types';
-export const createProject = () => {
+import {  SET_KUBE_CONTEXT_WITH_CLUSTERS, LOAD_KUBE_CONTEXT} from './workspace.action.types';
+
+export const setKubeContextAndClusters = (payload) => {
   return {
-    type: CREATE_PROJECT,
+    payload,
+    type: SET_KUBE_CONTEXT_WITH_CLUSTERS,
   };
 };
-export const loadProject = () => {
+
+export const loadKubeContext = (path) => {
   return {
-    type: LOAD_PROJECT,
+    type: LOAD_KUBE_CONTEXT,
   };
 };

@@ -1,24 +1,17 @@
-import { CREATE_PROJECT, LOAD_PROJECT } from './workspace.action.types';
+import { SET_KUBE_CONTEXT_WITH_CLUSTERS, LOAD_KUBE_CONTEXT } from './workspace.action.types';
 
 const INITIAL_STATE = {
-  showCreateProject: false,
-  showLoadProject: false,
+  kubeContext: null,
+  clusters: [],
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case CREATE_PROJECT:
+    case SET_KUBE_CONTEXT_WITH_CLUSTERS:
       return {
         ...state,
-        showCreateProject: true,
-        showLoadProject: false,
-      };
-
-    case LOAD_PROJECT:
-      return {
-        ...state,
-        showCreateProject: false,
-        showLoadProject: true,
+        kubeContext: action.payload.name,
+        clusters: action.payload.clusters,
       };
     default: return state;
   }
