@@ -1,12 +1,14 @@
 import {
   SET_KUBE_CONTEXT_WITH_CLUSTERS,
-  SET_NAMESPACES
+  SET_NAMESPACES,
+  SET_PODS
 } from './workspace.action.types';
 
 const INITIAL_STATE = {
   kubeContext: null,
   clusters: [],
-  namespaces: []
+  namespaces: [],
+  pods: [],
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -16,13 +18,21 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         kubeContext: action.payload.name,
         clusters: action.payload.clusters,
-        namespaces: []
+        namespaces: [],
+        pods: []
       };
 
     case SET_NAMESPACES:
       return {
         ...state,
-        namespaces: action.payload.namespaces
+        namespaces: action.payload.namespaces,
+        pods: []
+      };
+
+    case SET_PODS:
+      return {
+        ...state,
+        pods: action.payload.pods
       };
 
     default: return state;

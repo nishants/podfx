@@ -8,7 +8,8 @@ import {
 
 import {
   setKubeContextAndClusters,
-  setNamespaces
+  setNamespaces,
+  setPods
 } from './workspace.actions';
 
 function* executeLoadKubeContext(action){
@@ -37,10 +38,9 @@ function* executeGetPods(action){
     const clusterName = action.payload.cluster.name;
     const namespace = action.payload.namespace.name;
     const response = yield call(window.appShell.apiClient.getPods, {kubeContextName, clusterName, namespace});
-    console.log(response)
-    // yield put(setKubeContextAndClusters(response));
+    yield put(setPods(response));
   } catch (e) {
-    alert(`Failed to get namespaces : ${e.message}`);
+    alert(`Failed to get pods : ${e.message}`);
   }
 }
 
