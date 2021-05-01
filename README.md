@@ -84,6 +84,118 @@ How to parse console outptuts and map it to a command ?
 
 
 
+### Contracts: 
+
+- **`loadKubeContext(path = null)`**
+
+  - Get kubernetes configuration from the path
+
+  - if path is null, read default kubeconfig file
+
+  - Sets the kube config in current lib.
+
+  - returns  list of clusters and path: 
+
+    ```yaml
+    {
+    	kubeContext : {
+    		name: "/path/to/kubeconfig"
+    	},
+    	clusters: [
+    		{name: ""},
+        {name: ""},
+        {name: ""},
+    	]
+    }
+    ```
+
+    
+
+- **`getNameSpaces(kubeContextPath, clusterName)`**
+
+  - Get list of namespaces in kubernetes cluster using the context file
+
+  - The context should be already loaded in memory
+
+  - returns list of names spaces
+
+    ```yaml
+    {
+    	kubeContext : {name: "/path/to/kubeconfig"},
+    	cluster: {name: "clusterName"}
+    	namespaces: [
+    		{name: ""},
+        {name: ""},
+        {name: ""},
+    	]
+    }
+    ```
+
+- **`getPods(kubeContextPath, clusterName, namespace)`**
+
+  - get pods in namespace
+
+    ```yaml
+    {
+    	kubeContext : {name: "/path/to/kubeconfig"},
+    	cluster: {name: "clusterName"},
+      namespace: {name: "namespace"},
+    	pods: [
+    		{name: ""},
+        {name: ""},
+        {name: ""},
+    	]
+    }
+    ```
+
+- **`getContainers(kubeContextPath, clusterName, namespace, podName)`**
+
+  - get containers in pods
+
+    ```yaml
+    {
+    	kubeContext : {name: "/path/to/kubeconfig"},
+    	cluster: {name: "clusterName"},
+      namespace: {name: "namespace"},
+      pod: {name: "podName"},
+    	containers: [
+    		{name: ""},
+        {name: ""},
+        {name: ""},
+    	]
+    }
+    ```
+
+- **`GetFiles(kubeContextPath, clusterName, namespace, podName, containerName, path)`**
+
+  - Get files in the path
+
+    ```yaml
+    {
+    	kubeContext : {name: "/path/to/kubeconfig"},
+    	cluster: {name: "clusterName"},
+      namespace: {name: "namespace"},
+      pod: {name: "podName"},
+    	container: {name: "contaierName"},
+    	path: "/path/to/dir",
+    	contents: [
+    		{name: "app", type: "file", created: "23/02/2021"},
+        {name: "lib", type: "dir" , created: "23/02/2021"},
+    	]
+    }
+    ```
+
+    
+
+  
+
+- 
+
+  ```
+  ```
+
+  
+
 ### Resources
 
 - K8s NodeJs API: https://github.com/kubernetes-client/javascript
