@@ -2,7 +2,11 @@ import {useState} from 'react';
 
 const nullWorkspace = {
   path : "/users/nish/kubeconfig.js",
-  clusters: {count : 2}
+  clusters: [
+    {name: "cluster-one"},
+    {name: "cluster-two"},
+    {name: "cluster-three"},
+  ]
 };
 
 const workspace = {
@@ -31,9 +35,16 @@ export async function selectWorkspace(defualtDir) {
   };
   const result = await window.appShell.apiClient.fileSelector({dialogConfig});
   const path = result.filePaths.pop();
+  const random = parseInt(Math.random() * 10);
   window.setWorkspace({
     path : path,
-    clusters: {count : parseInt(Math.random() * 10)}
+    clusters: [
+      {name: "cluster-one"},
+      {name: "cluster-two"},
+      {name: "cluster-three"},
+    ].map(c => {
+      return {...c, name: c.name + random}
+    })
   });
 };
 

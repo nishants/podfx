@@ -8,7 +8,7 @@ const KubeContext = () => {
   return (
     <div className='kube-context'>
       <label>KubeConfig:</label>
-      <span>{workspace.path}({workspace.clusters.count})</span>
+      <span>{workspace.path}({workspace.clusters.length})</span>
       <button onClick={selectWorkspace}>Select</button>
     </div>
   );

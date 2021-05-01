@@ -9,17 +9,25 @@ const Cluster = ({clusters, setCluster, currentCluster}) => {
     );
   });
 
-  const setChosenCluster = (clusterName) => {
-    const cluster = clusters.find(c => c.name === clusterName);
+  const setChosenCluster = (event) => {
+    const cluster = clusters.find(c => c.name === event.currentTarget.value);
     setCluster(cluster);
   };
 
+  const selectRef = React.useRef(null);
+
+  //reset selected cluster when new list of clusters are available
+  React.useEffect(() => {
+    selectRef.current.value= "$__no_cluster_$";
+    setCluster(null);
+  }, [clusters]);
+
   return (
     <div>
-      {JSON.stringify({clusters, setCluster, currentCluster})}
       <select
-        onChange={(e) => setChosenCluster(e.currentTarget.value)}
-        value={currentCluster.name}>
+        ref={selectRef}
+        onChange={setChosenCluster}>
+        <option disabled value="$__no_cluster_$"> -- select an option -- </option>
         {options}
       </select>
     </div>
