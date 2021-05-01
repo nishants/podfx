@@ -54,6 +54,9 @@
 - [ ] create ui interactions with mocks
 
   - [x] promise based shell interaction in electron
+  - [ ] Select a kubecontext file from explorer:
+    - https://www.electronjs.org/docs/api/dialog#dialogshowopendialogsyncbrowserwindow-options
+    - https://stackoverflow.com/a/38544277/1065020
   - [ ] create a tree explorer ui
   - [ ] kubectl found
   - [ ] kubectul not found, select file

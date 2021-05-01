@@ -1,7 +1,8 @@
 const {ipcMain} = require('electron');
 
 const shellApis = {
-  getKubeConfig: require('./getKubeConfig/getKubeConfig')
+  getKubeConfig: require('./getKubeConfig/getKubeConfig'),
+  fileSelector: require('./fileSelector'),
 };
 
 const startShell = (appWindow, lib) => {

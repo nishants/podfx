@@ -1,7 +1,8 @@
 const {ipcRenderer} = require('electron');
 
 const clientApis = {
-  getKubeConfig: require('./getKubeConfig/getKubeConfig')
+  getKubeConfig: require('./getKubeConfig/getKubeConfig'),
+  fileSelector: require('./fileSelector'),
 };
 
 module.exports = {
