@@ -1,4 +1,10 @@
-import {  SET_KUBE_CONTEXT_WITH_CLUSTERS, LOAD_KUBE_CONTEXT} from './workspace.action.types';
+import {
+  SET_KUBE_CONTEXT_WITH_CLUSTERS,
+  LOAD_KUBE_CONTEXT,
+
+  GET_NAMESPACES,
+  SET_NAMESPACES
+} from './workspace.action.types';
 
 export const setKubeContextAndClusters = (payload) => {
   return {
@@ -7,8 +13,23 @@ export const setKubeContextAndClusters = (payload) => {
   };
 };
 
-export const loadKubeContext = (path) => {
+export const loadKubeContext = (payload) => {
   return {
+    payload,
     type: LOAD_KUBE_CONTEXT,
+  };
+};
+
+export const getNameSpaces = (kubeContext, cluster) => {
+  return {
+    type: GET_NAMESPACES,
+    payload: {kubeContext, cluster}
+  };
+};
+
+export const setNamespaces = (payload) => {
+  return {
+    type: SET_NAMESPACES,
+    payload
   };
 };
