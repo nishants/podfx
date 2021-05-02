@@ -1,0 +1,36 @@
+$lineHeight: 25px;
+$padding: 5px;
+$alternateRowColor: rgba(0,0,0,0.03);
+
+.file-explorer{
+  padding: 20px;
+  > ul {
+    border: 1px solid $veryLightBorderColor;
+    padding: 20px 40px;
+    margin: 10px 0;
+    > li{
+      border: 1px solid transparent;
+      line-height: $lineHeight;
+      height: $lineHeight;
+      cursor: pointer;
+
+      > .file-type-icon.dir{
+        color: $folderColor;
+      }
+
+      > .file-name{
+        padding-left: $padding;
+        cursor: inherit;
+      }
+      &:hover{
+        border: 1px solid $lightBorderColor;
+      }
+      &.selected{
+
+      }
+    }
+    > li:nth-child(2n){
+      background: $alternateRowColor;
+    }
+  }
+}

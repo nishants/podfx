@@ -25,9 +25,13 @@ const Files = ({getFiles}) => {
   }
 
   const items = filesOnCurrentPath.map((file) => {
+    const iconClassName = `file-type-icon ${file.isDir ? "dir" : ""}`;
     return (
-      <li key={file.name} onClick={() => select(file)}>
-        {file.name} {file.isDir ? "/" : ""}
+      <li key={file.name} onDoubleClick={() => select(file)}>
+        <span className={iconClassName}>
+          {file.isDir ? (<i className="fas fa-folder"></i>) : (<i className="fas fa-file"></i>)}
+        </span>
+        <label className='file-name'>{file.name}</label>
       </li>
     );
   });
