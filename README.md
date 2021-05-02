@@ -68,28 +68,6 @@
 
 - [ ] download a file using exec
 
-  ```javascript
-  API : 
-  const cp = new k8s.Cp(getContext(kubeContext.name));
-  cp.cpFromPod(namespace, podName, containerName, 
-               pathToFileOnPod, 
-               dirOnLocal
-  );
-   
-  command that runs on pod : 
-  tar zcf -, srcPath 
-  
-  tar zcf - /app/Grpc.Net.Common.dll 
-  
-  tar zcf -f - Grpc.Net.Common.dll 
-  
-  
-  tar -xf /app/Grpc.Net.Common.dll --xform='s|^|Grpc.Net.Common/|S'
-  
-  ```
-
-  
-
 - [ ] create a text file using exec
 
 - [ ] create a binary file using exec
@@ -106,27 +84,7 @@ How to parse console outptuts and map it to a command ?
 
 
 
-### Problems with kubectl cp
 
-- Tar needs to be present in container image 
-
-  > **!!!Important Note!!! # Requires that the 'tar' binary is present in your container # image. If 'tar' is not present, 'kubectl cp' will fail. # # For advanced use cases, such as symlinks, wildcard expansion or # file mode preservation consider using 'kubectl exec'. # Copy /tmp/foo local file to /tmp/bar in a remote pod in namespace**
-
-- Alternative : 
-
-  - try with sh
-  - try with bash
-  - if both not found throw error
-  - echo file contents on cli and copy it.
-
-- In cli : 
-
-  ```bash
-  kubectl cp pricing-deployment-f54585c4c-6z4ql:/app/Grpc.Net.Common.dll /Users/dawn/projects/podfs/docs/spikes/k8s-client/lib/temp/temp.dll
-  
-  ```
-
-  
 
 ### Contracts: 
 

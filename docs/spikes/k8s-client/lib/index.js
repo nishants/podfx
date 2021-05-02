@@ -1,6 +1,7 @@
 const k8s = require('@kubernetes/client-node');
 const parseLsOutput = require('./ls');
 const executeCommand = require('./ls/executeCommand');
+const copyFileFromPod = require('./ls/copyFileFromPod');
 
 const contexts = {};
 const apiClients = {};
@@ -85,13 +86,16 @@ const getFiles = async ({ kubeContextName, namespace, podName, containerName, pa
   const {pods} = await getPods({kubeContextName, clusterName, namespace});
   const podName = pods[0].name;
   const containerName = pods[0].containers[0].name;
-  const exec = new k8s.Exec(kubeContext);
+  const exec = new k8s.Exec(getContext(kubeContextName));
   const files = await getFiles({ kubeContextName, namespace, podName, containerName, path : "/"});
 
   const aFile = files.find(f => !f.isDir);
   console.log({aFile});
   // const cp = new k8s.Cp(getContext(kubeContext.name));
   // cp.cpFromPod(namespace, podName, containerName, `./Grpc.Net.Common.dll`, `./temp/`);
+  const srcPath = `./Grpc.Net.Common.dll`;
+  const localpath = './temp/';
+  await copyFileFromPod(exec, namespace, podName, containerName, srcPath, localpath);
   // //
   // console.log({kubeContext, cluster, namespaces});
   // console.log(namespaces);
