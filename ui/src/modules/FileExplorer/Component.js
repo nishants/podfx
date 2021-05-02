@@ -21,14 +21,31 @@ const Form = ({clusters, kubeContext, namespaces, pods, loadKubeContext, getName
       .catch(e => alert(`Failed to get files ${e.message}`))
   };
 
-  const downloadFile = (pathInPod) => {
+  const downloadFile = async (pathInPod, fileName) => {
+    // Use below link for options :
+    // https://www.electronjs.org/docs/api/dialog#dialogshowopendialogbrowserwindow-options
+
+    const dialogConfig = {
+      title: 'Select Download Directory',
+      buttonLabel: 'Save Here',
+      properties:['openDirectory', 'multiSelections', 'showHiddenFiles', 'createDirectory']
+    };
+
+    const selection = await window.appShell.apiClient.fileSelector({dialogConfig});
+
+    if(selection.canceled){
+      return;
+    }
+
+    const pathOnLocal = selection.filePaths.pop() + "/" + fileName;
+
     const params = {
       kubeContextName : kubeContext,
       namespace: currentNamespace.name,
       podName: currentPod.name,
       containerName: currentContainer.name,
       pathInPod,
-      pathOnLocal: "/Users/dawn/projects/podfs/docs/spikes/k8s-client/lib/temp/downloaded.txt"
+      pathOnLocal
     };
     return window.appShell.apiClient.downloadFile(params)
       .catch(e => alert(`Failed to download file:  ${e.message}`))

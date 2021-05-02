@@ -23,7 +23,7 @@ const Files = ({getFiles, downloadFile}) => {
       setCurrentPath(`${currentPath}${file.name}/`);
       return ;
     }
-    downloadFile(`${currentPath}${file.name}`);
+    downloadFile(`${currentPath}${file.name}`, file.name);
   };
 
   const goBack = () => {
