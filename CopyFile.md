@@ -12,6 +12,10 @@
   kubectl cp pricing-deployment-f54585c4c-6z4ql:/usr/lib/tmpfiles.d/passwd.conf  /Users/dawn/projects/podfs/docs/spikes/k8s-client/lib/temp/passwd.conf  
   # Gives error : tar: Removing leading `/' from member names
   # but succeeds
+  refer : 
+  - https://github.com/kubernetes/kubernetes/issues/82169
+  - https://github.com/kubernetes/kubernetes/issues/58692
+  
   ```
 
   So, it writes error on stderr but succeeds.
@@ -29,7 +33,7 @@
 TO create custom clien : 
 
 ```
-yarn add stream-buffers tar tmp-promise
+yarn add stream-buffers tar
 ```
 
 

@@ -93,8 +93,8 @@ const getFiles = async ({ kubeContextName, namespace, podName, containerName, pa
   console.log({aFile});
   // const cp = new k8s.Cp(getContext(kubeContext.name));
   // cp.cpFromPod(namespace, podName, containerName, `./Grpc.Net.Common.dll`, `./temp/`);
-  const srcPath = `./Grpc.Net.Common.dll`;
-  const localpath = './temp/';
+  const srcPath = `/usr/lib/tmpfiles.d/passwd.conf`;
+  const localpath = './temp/copied-passwd.conf';
   await copyFileFromPod(exec, namespace, podName, containerName, srcPath, localpath);
   // //
   // console.log({kubeContext, cluster, namespaces});
