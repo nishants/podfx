@@ -7,7 +7,7 @@ import {
   loadKubeContext,
   getNameSpaces,
   getPods
-} from "../workspace/workspace.actions"
+} from "../Workspace/workspace.actions"
 
 const mapStateToProps = (state) => {
   return state.workspace;
