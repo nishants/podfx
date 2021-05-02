@@ -1,5 +1,6 @@
 const k8s = require('@kubernetes/client-node');
-const getFilesFromContainer = require('./ls');
+const parseLsOutput = require('./ls');
+const executeCommand = require('./ls/executeCommand');
 
 const contexts = {};
 const apiClients = {};
@@ -68,7 +69,9 @@ const getPods = async ({kubeContextName, clusterName, namespace}) => {
 
 const getFiles = async ({ kubeContextName, namespace, podName, containerName, path = "/"}) => {
   const exec = new k8s.Exec(getContext(kubeContextName));
-  return getFilesFromContainer(exec, namespace, podName, containerName, path);
+  const command = ['ls','-lhaF' , path];
+  const output = await executeCommand(exec, namespace, podName, containerName, command);
+  return parseLsOutput(output);
 }
 
 (async () => {
@@ -87,9 +90,9 @@ const getFiles = async ({ kubeContextName, namespace, podName, containerName, pa
 
   const aFile = files.find(f => !f.isDir);
   console.log({aFile});
-  const cp = new k8s.Cp(getContext(kubeContext.name));
-  cp.cpFromPod(namespace, podName, containerName, `./Grpc.Net.Common.dll`, `./temp/`);
-  //
+  // const cp = new k8s.Cp(getContext(kubeContext.name));
+  // cp.cpFromPod(namespace, podName, containerName, `./Grpc.Net.Common.dll`, `./temp/`);
+  // //
   // console.log({kubeContext, cluster, namespaces});
   // console.log(namespaces);
   // console.log(pods[0].containers);
