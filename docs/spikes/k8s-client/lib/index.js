@@ -95,15 +95,15 @@ const getFiles = async ({ kubeContextName, namespace, podName, containerName, pa
 
   // const cp = new k8s.Cp(getContext(kubeContext.name));
   // await cp.cpToPod(namespace, 'pricing-deployment-f54585c4c-6z4ql', containerName, fileToUpload, pathToUploadAt);
-  const fileToUpload = "/Users/dawn/projects/podfs/docs/spikes/k8s-client/lib/temp/hello-world.txt";
-  const pathToUploadAt = "/app/hello-world.txt";
-  await uploadFileToPod(exec, namespace, podName, containerName, fileToUpload, pathToUploadAt);
-  console.log("Copied to ", {namespace, podName, containerName});
+  // const fileToUpload = "/Users/dawn/projects/podfs/docs/spikes/k8s-client/lib/temp/hello-world.txt";
+  // const pathToUploadAt = "/app/hello-world.txt";
+  // await uploadFileToPod(exec, namespace, podName, containerName, fileToUpload, pathToUploadAt);
+  // console.log("Copied to ", {namespace, podName, containerName});
 
-  // const srcPath = `/usr/lib/tmpfiles.d/passwd.conf`;
-  // const localpath = './temp/copied-passwd.conf';
-  // await copyFileFromPod(exec, namespace, podName, containerName, srcPath, localpath);
-  // //
+  const srcPath = `/app/appsettings.json`;
+  const localpath = '/Users/dawn/projects/podfs/docs/spikes/k8s-client/lib/temp/appsettings.json';
+  await copyFileFromPod(exec, namespace, podName, containerName, srcPath, localpath);
+  //
   // console.log({kubeContext, cluster, namespaces});
   // console.log(namespaces);
   // console.log(pods[0].containers);

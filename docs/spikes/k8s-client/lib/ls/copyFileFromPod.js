@@ -25,7 +25,13 @@ const copyFileFromPod = (exec, chosenNameSpace, podName, containerName, srcPath,
         // if (errStream.size()) {
         //   throw new Error(`Error from cpFromPod - details: \n ${errStream.getContentsAsString()}`);
         // }
-        await tar.x({file: tgtPath});
+        fs.createReadStream(tgtPath).pipe(
+          tar.x({
+            strip: 1,
+            C: require('path').dirname(tgtPath)
+          })
+        )
+        // await tar.x({file: '/Users/dawn/projects/podfs/docs/spikes/k8s-client/lib/temp/appsettings.json'});
         resolve();
       },
     );
