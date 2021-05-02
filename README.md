@@ -66,13 +66,11 @@
   - [x] select cluster
   - [x] update files dynamically in ui
 
-- [ ] download a file using exec
+- [x] download a file
 
-- [ ] create a text file using exec
+- [ ] upload a file 
 
-- [ ] create a binary file using exec
-
-- [ ] handle containers with sidecar
+  
 
 
 

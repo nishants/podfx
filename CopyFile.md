@@ -87,4 +87,10 @@ tar -xf /app/Grpc.Net.Common.dll --xform='s|^|Grpc.Net.Common/|S'
 
   
 
-### 
+###- Copy into a pod
+
+```
+kubectl cp /Users/dawn/projects/podfs/docs/spikes/k8s-client/lib/temp/hello-world.txt pricing-deployment-f54585c4c-6z4ql:/app/hello-world.txt
+
+```
+
