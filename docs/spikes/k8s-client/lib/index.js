@@ -1,6 +1,16 @@
 const k8s = require('@kubernetes/client-node');
+const getFilesFromContainer = require('./ls');
+
 const contexts = {};
 const apiClients = {};
+
+const getContext = (contextName) => {
+  const context = contexts[contextName];
+  if(!context){
+    throw new Error(`"${contextName}" : kube context not found.`);
+  }
+  return context;
+};
 
 const loadContext = (path = null) => {
   const kubeConfig = new k8s.KubeConfig();
@@ -15,20 +25,20 @@ const loadContext = (path = null) => {
 
   return {
     name,
-    clusters: contexts[name].getContexts()
+    clusters: getContext(name).getContexts()
   };
 };
 
 const getApiClient = (kubeContextName, clusterName) => {
   const apicClientName = `${kubeContextName}-${clusterName}`;
   if(!apiClients[apicClientName]){
-    apiClients[apicClientName] = contexts[kubeContextName].makeApiClient(k8s.CoreV1Api);
+    apiClients[apicClientName] = getContext(kubeContextName).makeApiClient(k8s.CoreV1Api);
   }
   return apiClients[apicClientName];
 }
 
-const getNameSpaces = async (kubeContextName, clusterName)=> {
-  contexts[kubeContextName].setCurrentContext(clusterName);
+const getNameSpaces = async ({kubeContextName, clusterName})=> {
+  getContext(kubeContextName).setCurrentContext(clusterName);
   const namespacesResponse = await getApiClient(kubeContextName, clusterName).listNamespace();
   const namespaces = namespacesResponse.body.items.map(definition => {
     return {
@@ -39,7 +49,7 @@ const getNameSpaces = async (kubeContextName, clusterName)=> {
   return {namespaces};
 };
 
-const getPods = async (kubeContextName, clusterName, namespace) => {
+const getPods = async ({kubeContextName, clusterName, namespace}) => {
   const podsResponse = await getApiClient(kubeContextName, clusterName).listNamespacedPod(namespace);
   const pods = podsResponse.body.items.map(definition => {
     return {
@@ -53,16 +63,34 @@ const getPods = async (kubeContextName, clusterName, namespace) => {
       definition
     }
   });
-  return pods;
+  return {pods};
 };
+
+const getFiles = async ({ kubeContextName, namespace, podName, containerName, path = "/"}) => {
+  const exec = new k8s.Exec(getContext(kubeContextName));
+  return getFilesFromContainer(exec, namespace, podName, containerName, path);
+}
 
 (async () => {
   const kubeContext = loadContext();
-  const cluster = kubeContext.clusters.find(c => c.name === 'minikube');
-  const namespaces = await getNameSpaces(kubeContext.name, cluster.name);
-  const pods = await getPods(kubeContext.name, cluster.name, namespaces.namespaces[0].name);
+  const kubeContextName = kubeContext.name;
+  const clusterName = 'minikube';
+  const namespace = 'default';
 
-  console.log({kubeContext, cluster, namespaces});
-  console.log(namespaces);
-  console.log(pods[0].containers);
+  const namespaces = await getNameSpaces({kubeContextName, clusterName});
+
+  const {pods} = await getPods({kubeContextName, clusterName, namespace});
+  const podName = pods[0].name;
+  const containerName = pods[0].containers[0].name;
+  const exec = new k8s.Exec(kubeContext);
+  const files = await getFiles({ kubeContextName, namespace, podName, containerName, path : "/"});
+
+  const aFile = files.find(f => !f.isDir);
+  console.log({aFile});
+  const cp = new k8s.Cp(getContext(kubeContext.name));
+  cp.cpFromPod(namespace, podName, containerName, `./Grpc.Net.Common.dll`, `./temp/`);
+  //
+  // console.log({kubeContext, cluster, namespaces});
+  // console.log(namespaces);
+  // console.log(pods[0].containers);
 })();

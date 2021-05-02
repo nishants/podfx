@@ -1,4 +1,4 @@
-const { createWriteStream, createReadStream } = require('../streams');
+const { createWriteStream, createReadStream } = require('./streams');
 
 const getFiles = (exec, chosenNameSpace, podName, containerName, path = "/") => {
   const inStream = createReadStream();
@@ -67,11 +67,7 @@ const getFiles = (exec, chosenNameSpace, podName, containerName, path = "/") => 
         }
         resolve(getFilesFrom(output));
       }).catch(reject);
-    console.log(connection);
   });
 };
 
-module.exports = {
-  getFiles
-};
-
+module.exports = getFiles;
