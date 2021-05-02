@@ -6,6 +6,7 @@ const shellApis = {
   getNamespaces: require('./getNamespaces'),
   getPods: require('./getPods'),
   getFiles: require('./getFiles'),
+  downloadFile: require('./downloadFile'),
 };
 
 const startShell = (appWindow, lib) => {

@@ -4,6 +4,7 @@ const toShell = {
   GET_NAMESPACES: 'to-messages/GET_NAMESPACES',
   GET_PODS: 'to-messages/GET_PODS',
   GET_FILES: 'to-messages/GET_FILES',
+  DOWNLOAD_FILE: 'to-messages/DOWNLOAD_FILE',
 };
 
 const fromShell = {
@@ -12,6 +13,7 @@ const fromShell = {
   GET_NAMESPACES: 'from-messages/GET_NAMESPACES',
   GET_PODS: 'from-messages/GET_PODS',
   GET_FILES: 'from-messages/GET_FILES',
+  DOWNLOAD_FILE: 'from-messages/DOWNLOAD_FILE',
 };
 
 module.exports = {

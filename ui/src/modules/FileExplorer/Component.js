@@ -21,6 +21,19 @@ const Form = ({clusters, kubeContext, namespaces, pods, loadKubeContext, getName
       .catch(e => alert(`Failed to get files ${e.message}`))
   };
 
+  const downloadFile = (pathInPod) => {
+    const params = {
+      kubeContextName : kubeContext,
+      namespace: currentNamespace.name,
+      podName: currentPod.name,
+      containerName: currentContainer.name,
+      pathInPod,
+      pathOnLocal: "/Users/dawn/projects/podfs/docs/spikes/k8s-client/lib/temp/downloaded.txt"
+    };
+    return window.appShell.apiClient.downloadFile(params)
+      .catch(e => alert(`Failed to download file:  ${e.message}`))
+  };
+
   // Load default kube context
   React.useEffect(() => {
     if(!kubeContext){
@@ -49,6 +62,7 @@ const Form = ({clusters, kubeContext, namespaces, pods, loadKubeContext, getName
   const fileExplorer = currentContainer ? (
     <Files
       getFiles={getFiles}
+      downloadFile={downloadFile}
     />
   ) : null;
 

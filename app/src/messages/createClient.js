@@ -6,6 +6,7 @@ const clientApis = {
   getNamespaces: require('./getNamespaces'),
   getPods: require('./getPods'),
   getFiles: require('./getFiles'),
+  downloadFile: require('./downloadFile'),
 };
 
 module.exports = {

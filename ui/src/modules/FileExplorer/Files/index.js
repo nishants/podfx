@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const Files = ({getFiles}) => {
+const Files = ({getFiles, downloadFile}) => {
 
   const [currentPath, setCurrentPath] = React.useState('/');
   const [filesOnCurrentPath, setFilesOnCurrentPath] = React.useState([]);
@@ -21,7 +21,9 @@ const Files = ({getFiles}) => {
   const open = (file) => {
     if(file.isDir){
       setCurrentPath(`${currentPath}${file.name}/`);
+      return ;
     }
+    downloadFile(`${currentPath}${file.name}`);
   };
 
   const goBack = () => {
