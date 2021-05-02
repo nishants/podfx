@@ -57,14 +57,14 @@
   - [x] Select a kubecontext file from explorer:
     - https://www.electronjs.org/docs/api/dialog#dialogshowopendialogsyncbrowserwindow-options
     - https://stackoverflow.com/a/38544277/1065020
-  - [ ] create a tree explorer ui
-  - [ ] kubectl found
+  - [x] create a tree explorer ui
+  - [x] kubectl found
   - [ ] kubectul not found, select file
-  - [ ] select cluster
-  - [ ] select namepsace
-  - [ ] select pod
-  - [ ] select cluster
-  - [ ] update files dynamically in ui
+  - [x] select cluster
+  - [x] select namepsace
+  - [x] select pod
+  - [x] select cluster
+  - [x] update files dynamically in ui
 
 - [ ] download a file using exec
 

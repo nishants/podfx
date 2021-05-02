@@ -51,9 +51,9 @@ const Files = ({getFiles}) => {
 
   return (
     <div className="file-explorer">
-      <div>
-        <div>PWD: ({currentPath})</div>
-        <button onClick={goBack}>Back</button>
+      <div className="navigator">
+        <button className="fas fa-arrow-circle-left" onClick={goBack}></button>
+        <input type="text" disabled value={currentPath}/>
       </div>
       <ul>
         {items}

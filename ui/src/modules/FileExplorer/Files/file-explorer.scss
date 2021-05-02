@@ -5,6 +5,24 @@ $selectedFileColor: $folderColor;
 
 .file-explorer{
   padding: 20px;
+  .navigator{
+    line-height: $lineHeight;
+    height: $lineHeight;
+    button,> input{
+      box-sizing: border-box;
+      line-height: inherit;
+      height: inherit;
+      border: 0;
+      margin: 0;
+      padding: 0 20px;
+    }
+    button{
+      cursor: pointer;
+    }
+    > input{
+      background-color: $alternateRowColor;
+    }
+  }
   > ul {
     border: 1px solid $veryLightBorderColor;
     padding: 20px 40px;
